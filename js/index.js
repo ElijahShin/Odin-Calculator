@@ -38,3 +38,18 @@ function operate(val1, val2, operator) {
     break;
   }
 }
+
+function btnClick() {
+  const btns = document.querySelectorAll('button');
+  let btnVal = '';
+
+  btns.forEach(ele => {
+    ele.addEventListener('click', event => {
+      btnVal = event.target.textContent;
+    });
+  })
+
+  return btnVal;
+}
+
+btnClick();
