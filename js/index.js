@@ -1,6 +1,9 @@
-let val1 = 0;
-let val2 = 0;
-let operator = '';
+const dataStore = {
+  operand1: '',
+  operand2: '',
+  operator: '',
+  btnValue: '',
+}
 
 function add(val1, val2) {
   return val1 + val2;
@@ -41,15 +44,22 @@ function operate(val1, val2, operator) {
 
 function btnClick() {
   const btns = document.querySelectorAll('button');
-  let btnVal = '';
 
   btns.forEach(ele => {
     ele.addEventListener('click', event => {
-      btnVal = event.target.textContent;
+      dataStore['btnValue'] = event.target.textContent;
+      console.log(dataStore);
+      displayScreen();
     });
-  })
+  });
+  
+}
 
-  return btnVal;
+function displayScreen() {
+  const screen = document.querySelector('.screen-wrapper');
+  //Perform a empty check later
+  screen.textContent = dataStore['btnValue'];
+  
 }
 
 btnClick();
