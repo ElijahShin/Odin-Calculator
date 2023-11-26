@@ -18,6 +18,10 @@ function divide(val1, val2) {
   return val1 / val2;
 }
 
+function mod(val1, val2) {
+  return val1 % val2;
+}
+
 function operate(val1, val2, operator) {
   switch(operator) {
     case '+':
