@@ -3,6 +3,7 @@ const dataStore = {
   operand2: '',
   operator: '',
   btnValue: '',
+  btnType: '',
 }
 
 function add(val1, val2) {
@@ -47,8 +48,12 @@ function btnClick() {
 
   btns.forEach(ele => {
     ele.addEventListener('click', event => {
-      dataStore['btnValue'] = event.target.textContent;
+      const eTarget = event.target;
+      //First, store the data in the object
+      dataStore['btnValue'] = eTarget.textContent;
+      identifyType(eTarget.className);
       console.log(dataStore);
+      
       displayScreen();
     });
   });
@@ -60,6 +65,30 @@ function displayScreen() {
   //Perform a empty check later
   screen.textContent = dataStore['btnValue'];
   
+}
+
+/*
+Identify diferent value types.
+*/
+function identifyType(className) {
+
+  switch(className) {
+    case 'num' :
+      dataStore['btnType'] = 'num';
+    break;
+    case 'operator':
+      dataStore['btnType'] = 'operator';
+    break;
+    case 'dot':
+      dataStore['btnType'] = 'dot';
+    break;
+    case 'equal':
+      dataStore['btnType'] = 'equal';
+    break;
+    case 'format':
+      dataStore['btnType'] = 'format';
+    break;
+  }
 }
 
 btnClick();
