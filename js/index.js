@@ -1,6 +1,9 @@
-let value1 = '',
+let value1 = '', 
     value2 = '',
-    operator = '';
+    operator = '', 
+    displayValue = '';
+    isOpClickedLast = false;
+    opCount = 0;
 
 function add(val1, val2) {
   return val1 + val2;
@@ -40,5 +43,39 @@ function operate(strVal1, strVal2, operator) {
       return divide(toNum01, toNum02);
     break;
   }
+}
+
+function btnClick() {
+  const btns = document.querySelectorAll('button');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      let result = 0;
+      if(e.target.value === 'number') {
+        if(isOpClickedLast) {
+          value2 += e.target.textContent;
+        } else {
+          value1 += e.target.textContent;
+        }
+
+      } else if(e.target.value ==='operator') {
+        if(opCount >= 1 && value1 !=='' && value2 !=='') {
+          result = operate(value1, value2, operator);
+          value1 = result;
+          value2 = '';
+        }
+        operator = e.target.textContent;
+        isOpClickedLast = true;
+        opCount++;
+
+      } else if(e.target.value === 'equal') {
+        result = operate(value1, value2, operator);
+        console.log('Equals ' + result);
+      }
+    })
+  });
+
   
 }
+
+btnClick();
