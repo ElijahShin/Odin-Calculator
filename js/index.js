@@ -1,7 +1,6 @@
 let value1 = '', 
     value2 = '',
-    operator = '', 
-    displayValue = '';
+    operator = '',
     isOpClickedLast = false;
     opCount = 0;
 
@@ -51,6 +50,7 @@ function btnClick() {
   btns.forEach(btn => {
     btn.addEventListener('click', e => {
       let result = 0;
+      
       if(e.target.value === 'number') {
         if(isOpClickedLast) {
           value2 += e.target.textContent;
@@ -69,13 +69,25 @@ function btnClick() {
         opCount++;
 
       } else if(e.target.value === 'equal') {
-        result = operate(value1, value2, operator);
-        console.log('Equals ' + result);
+        if(value1 !== '' && value2 !== '') {
+          result = operate(value1, value2, operator);
+          console.log('Equals ' + result);
+          
+          dataReset();
+        }
       }
+      console.log("value1: " + value1 + " " + operator + " " + '\nvalue2: ' + value2);
     })
   });
 
   
+}
+
+function dataReset() {
+  value1 = '';
+  value2 = '';
+  operator = '';
+  isOpClickedLast = false;
 }
 
 btnClick();
