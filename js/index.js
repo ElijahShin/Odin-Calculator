@@ -56,18 +56,19 @@ function btnClick() {
 
   btns.forEach(btn => {
     btn.addEventListener('click', e => {
+      let eTarget = e.target;
       let result = 0;
 
-      if(e.target.value === 'number') {
+      if(eTarget.value === 'number') {
         if(isOpClickedLast) {
-          value2 += e.target.textContent;
+          value2 += eTarget.textContent;
           displayValue(value2);
         } else {
-          value1 += e.target.textContent;
+          value1 += eTarget.textContent;
           displayValue(value1);
         }
 
-      } else if(e.target.value ==='operator') {
+      } else if(eTarget.value ==='operator') {
         if(opCount >= 1 && value1 !=='' && value2 !=='') {
           result = operate(value1, value2, operator);
           value1 = result;
@@ -79,18 +80,16 @@ function btnClick() {
           value1 = 0;
           displayValue(value1);
         }
-        operator = e.target.textContent;
+        operator = eTarget.textContent;
         isOpClickedLast = true;
         opCount++;
 
-      } else if(e.target.value === 'equal') {
+      } else if(eTarget.value === 'equal') {
         if(value1 !== '' && value2 !== '') {
           result = operate(value1, value2, operator);
-          console.log('Equals ' + result);
           displayValue(result);
-          // dataReset();
         }
-      } else if(e.target.value === 'AC') {
+      } else if(eTarget.value === 'AC') {
         dataReset();
         displayValue(SCREEN_DEFAULT);
       }
